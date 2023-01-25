@@ -12,11 +12,11 @@ const apiUrl = 'https://api.openai.com/v1/completions';
 // Cria a função para fazer a solicitação
 function generateWords() {
     // Defina o texto de entrada
-    const prompt = 'gere apenas uma palavra  em "pt-br"';
+    const prompt = 'crie uma palavra aleatória que exista em portugues do brasil';
 
     // Defina as configurações opcionais
     const options = {
-        temperature: .5, // Controla a criatividade da resposta
+        temperature: 1, // Controla a criatividade da resposta
         max_tokens: 20, // Controla o tamanho da resposta
         n: 1, // Controla o número de respostas geradas
     };
@@ -48,32 +48,38 @@ function generateWords() {
             console.log(data)
 
             const text = data.choices[0].text;
-            console.log(text)
 
-
+            // filtrando a palavra
             let string = text;
             let letras = string.split('').filter(function (letra) {
                 return /[a-zA-Z\u00C0-\u017F]/.test(letra);
             });
 
 
-
+            // retornando em um array
+            // tornado o array e uma palavra
+            palavraChave = letras.join("");
             let container = document.getElementById("game-form");
             let contador = 0;
 
+
+            // crinado os inputs de acordo com a quantidade de letras dessa palavras
             letras.forEach(function (letra) {
                 contador += 1;
-
                 container.innerHTML += `  <input type="text" maxlength="1" pattern="[a-zA-Z\u00C0-\u017F]*" oninput="nextInput(this)"  class="letter-input" tabindex="${contador}">`
             });
 
-            palavraChave = text
+
+
+
             return palavraChave
 
 
 
 
+
         })
+
 
 
 
@@ -92,14 +98,17 @@ document.body.onload = generateWords;
 
 
 
-// verificando se tem somente letras
 
 
+// MANIPULANDO OS INPUTS
 let form = document.getElementById("game-form");
 form.addEventListener("submit", function (e) {
     e.preventDefault();
+
+
     let inputs = document.getElementsByClassName("letter-input");
 
+    // SE ALGUM IMPUT ESTIVER VAZIO 
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].value === "") {
             alert("Por favor, preencha todos os campos!");
@@ -108,32 +117,99 @@ form.addEventListener("submit", function (e) {
     }
 
     console.log(inputs)
+
     const array = Array.from(inputs)
 
-
+    //    mapeando a div com as imagens das vidas
     let palavras = ''
     let imgElements = document.querySelectorAll("#vidas img");
     let imgArray = Array.from(imgElements);
     let vidas = document.querySelector("#vidas");
 
+
+    // TRASNFORMA AS LETRAS DO INPUT  EM UMA PALAVRA
     array.forEach(function (e) {
 
         palavras += `${e.value}`
 
     });
-    console.log(palavras)
-    console.log(palavraChave)
-    if (palavras == palavraChave) {
+
+
+
+    console.log(palavras + "=fora")
+    console.log(palavraChave + '99')
+
+    // COMPARA A PALAVRA VINDA DOS INPUT COM A PALAVRA SECRETA  
+    if (palavras == palavraChave.toLowerCase()) {
+
         alert('voce acerteu')
-  } else if (imgArray.length != 1) {
-    imgArray.pop();
-    let imgToRemove = imgArray[imgArray.length - 1];
-    vidas.removeChild(imgToRemove);
-        alert('voce errrou')
-    }else if (imgArray.length === 1) {
-            
+
+
+
+    } else if (imgArray.length != 1) {
+
+        // tornando a palavra chave em miniscula
+        palavraChave = palavraChave.toLowerCase();
+
+        // TORNANDO A palavraChave EM ARRAY DE LETRAS
+        let arrayDosInputs = palavras.split("");
+        let arrayB = palavraChave.split("")
+
+        console.log(arrayDosInputs)
+
+        // VERIFICA SE ALGUM DOS INPUTS ESTA NA PALAVRA CHAVE
+
+
+
+        let historicalLetter = document.getElementById("historical-letter");
+        if (historicalLetter) {
+            let count = 0;
+            arrayDosInputs.forEach((element, index) => {
+                count++;
+                if (arrayB.includes(element) && arrayB.indexOf(element) === index) {
+                    let span = document.createElement("span");
+                    span.innerHTML = element;
+                    span.classList.add("blue-background");
+                    historicalLetter.appendChild(span);
+
+                } else if (arrayB.includes(element)) {
+
+                    let span = document.createElement("span");
+                    span.innerHTML = element;
+                    span.classList.add("green-background");
+                    historicalLetter.appendChild(span);
+
+                } else {
+                    let span = document.createElement("span");
+                    span.innerHTML = element;
+                    span.classList.add("red-background");
+                    historicalLetter.appendChild(span);
+                }
+            }); if (count > 0) {
+                let br = document.createElement("br");
+                historicalLetter.appendChild(br);
+            }
+        }
+
+
+
+
+
+
+
+        // REMOVE UMA VIDA NAS IMG 
+        imgArray.pop();
+        let imgToRemove = imgArray[imgArray.length - 1];
+        vidas.removeChild(imgToRemove);
+
+
+
+
+        // SE NAO ESTIVER  NA ULTIMA VIDA MORRE
+    } else if (imgArray.length === 1) {
+
         alert("Você morreu");
-      }
+    }
 
 
 
@@ -158,9 +234,18 @@ function nextInput(input) {
 
     }
 }
+
+
+
+
+
+
+// ----------------------------------------------------------------------
+// !!! FUNCAO DAS DICAS !!!!
+
+
 let dica = ''
 let palavradica = 'nao deu'
-
 const numberDica = document.getElementById('numberDica')
 const dicacase = document.getElementById('dica');
 numberDica.innerHTML = 3;
