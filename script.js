@@ -1,7 +1,10 @@
 // Defina sua chave de API do OpenAI
 const apiKey = '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';
+
 let palavraChave = 'bola'
 const createInputs = document.getElementById('letter-inputs')
+
+
 
 // Defina a URL da API
 const apiUrl = 'https://api.openai.com/v1/completions';
@@ -83,7 +86,7 @@ function generateWords() {
 
 
 // Chama a função no evento onload do body
-// document.body.onload = generateWords;
+document.body.onload = generateWords;
 
 
 
@@ -106,11 +109,12 @@ form.addEventListener("submit", function (e) {
 
     console.log(inputs)
     const array = Array.from(inputs)
+
+
     let palavras = ''
-
-
-
-
+    let imgElements = document.querySelectorAll("#vidas img");
+    let imgArray = Array.from(imgElements);
+    let vidas = document.querySelector("#vidas");
 
     array.forEach(function (e) {
 
@@ -119,11 +123,17 @@ form.addEventListener("submit", function (e) {
     });
     console.log(palavras)
     console.log(palavraChave)
-    if (palavras = palavraChave) {
+    if (palavras == palavraChave) {
         alert('voce acerteu')
-    } else {
+  } else if (imgArray.length != 1) {
+    imgArray.pop();
+    let imgToRemove = imgArray[imgArray.length - 1];
+    vidas.removeChild(imgToRemove);
         alert('voce errrou')
-    }
+    }else if (imgArray.length === 1) {
+            
+        alert("Você morreu");
+      }
 
 
 
