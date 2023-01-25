@@ -1,13 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Monoton&family=Poppins&family=Roboto+Mono:ital@0;1&display=swap"
+        rel="stylesheet">
+
+
+    <link rel="stylesheet" href="style.css">
+
+
+
     <title>Document</title>
+
 </head>
-<body><p>palavra aqui</p>
-  
+
+<body>
+
+
+
+
+    <h1 class="title" id="ze">0-TRECO</h1>
+    <header class="header">
+        <div class="dicas">
+            <label for="dicas" id="numberDica"></label>
+            <button id="dicas" onclick="criandoDica()"> dicas</button>
+        </div>
+        <div class="vidas">
+            <p>vidas:</p>
+            <span id="vidas">
+                <img src="/heart.png" alt="">
+                <img src="/heart.png" alt="">
+                <img src="/heart.png" alt="">
+                <img src="/heart.png" alt="">
+                <img src="/heart.png" alt="">
+                <img src="/heart.png" alt="">
+            </span>
+        </div>
+    </header>
+    <p class="card-dicas 2">DICA:</p>
+    <p class="card-dicas" id="dica" onload="animate()">
+    </p>
+
+
+
+
+
+    <form id="game-form">
+        <button type="submit" id="submit"></button>
+
+
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 <script src="/script.js"></script>
+
+
+
+
+
+
+
 </html>
