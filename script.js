@@ -1,5 +1,4 @@
 // Defina sua chave de API do OpenAI
-const apiKey = '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';
 
 let palavraChave = 'bola'
 const createInputs = document.getElementById('letter-inputs')
