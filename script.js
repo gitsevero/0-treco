@@ -220,20 +220,47 @@ form.addEventListener("submit", function (e) {
 function nextInput(input) {
     let value = input.value;
     let isLetter = /^[a-zA-ZÀ-ſ]*$/.test(value);
-    if (isLetter) {
-        let nextInput = input.nextElementSibling;
-        if (nextInput) {
-            nextInput.focus();
+    if (input.value !== "") {
+        if (isLetter) {
+            let nextInput = input.nextElementSibling;
+            if (nextInput) {
+                nextInput.focus();
+            } else {
+                checkWord();
+            }
+        } else {
+            alert('somente numeros')
+            input.value = "";
+
+
+        }
+    } else {
+        let prevInput = input.previousElementSibling;
+        if (prevInput) {
+            prevInput.focus();
         } else {
             checkWord();
         }
-    } else {
-        alert('somente numeros')
-        input.value = "";
-
-
     }
+
 }
+
+const gameForm = document.getElementById("game-form");
+gameForm.addEventListener("keydown", function (event) {
+    let currentInput = document.activeElement;
+    if (event.keyCode === 37) {
+        let prevInput = currentInput.previousElementSibling;
+        if (prevInput) {
+            prevInput.focus();
+        }
+    } else if (event.keyCode === 39) {
+        let nextInput = currentInput.nextElementSibling;
+        if (nextInput) {
+            nextInput.focus();
+        }
+    }
+});
+
 
 
 
