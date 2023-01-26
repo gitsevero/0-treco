@@ -1,41 +1,45 @@
- 
+
 // Init
 var $ = jQuery;
-var animationTime = 20,
-    days = 7;
- 
-$(document).ready(function(){
+var animationTime = 40,
+    days = 14;
+
+function goTime() {
+    document.body.children[0].style.display = 'none'
+    let display = document.getElementById('deadline');
+    display.style.display = 'block'
+
 
     // timer arguments: 
     //   #1 - time of animation in mileseconds, 
     //   #2 - days to deadline
 
-    $('#progress-time-fill, #death-group').css({'animation-duration': animationTime+'s'});
+    $('#progress-time-fill, #death-group').css({ 'animation-duration': animationTime + 's' });
 
     var deadlineAnimation = function () {
-        setTimeout(function(){
-            $('#designer-arm-grop').css({'animation-duration': '1.5s'});
-        },0);
+        setTimeout(function () {
+            $('#designer-arm-grop').css({ 'animation-duration': '3s' });
+        }, 0);
 
-        setTimeout(function(){
-            $('#designer-arm-grop').css({'animation-duration': '1s'});
-        },4000);
+        setTimeout(function () {
+            $('#designer-arm-grop').css({ 'animation-duration': '2s' });
+        }, 4000);
 
-        setTimeout(function(){
-            $('#designer-arm-grop').css({'animation-duration': '0.7s'});
-        },8000);
+        setTimeout(function () {
+            $('#designer-arm-grop').css({ 'animation-duration': '1.4s' });
+        }, 8000);
 
-        setTimeout(function(){
-            $('#designer-arm-grop').css({'animation-duration': '0.3s'});
-        },12000);
+        setTimeout(function () {
+            $('#designer-arm-grop').css({ 'animation-duration': '0.6s' });
+        }, 12000);
 
-        setTimeout(function(){
-            $('#designer-arm-grop').css({'animation-duration': '0.2s'});
-        },15000);
+        setTimeout(function () {
+            $('#designer-arm-grop').css({ 'animation-duration': '0.4s' });
+        }, 15000);
     };
 
     function timer(totalTime, deadline) {
-        var time = totalTime * 1000;
+        var time = totalTime * 2000;
         var dayDuration = time / deadline;
         var actualDay = deadline;
 
@@ -63,7 +67,7 @@ $(document).ready(function(){
     deadlineAnimation();
     timer(animationTime, days);
 
-    setInterval(function(){
+    setInterval(function () {
         timer(animationTime, days);
         deadlineAnimation();
 
@@ -71,4 +75,4 @@ $(document).ready(function(){
 
     }, animationTime * 1000);
 
-});
+};

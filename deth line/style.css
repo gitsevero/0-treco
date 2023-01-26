@@ -20,28 +20,23 @@ See you.
 */
 
 html {
-    font-size: 1em;
+
     line-height: 1.4;
 }
 
-html,
-body {
-    height: 100%;
-}
 
-body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-}
+
+
+
 
 
 #deadline {
-    width:581px;
+    display: none;
+    width: 400px;
     max-width: 100%;
-    height:158px;
+    height: 158px;
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     z-index: 1;
     -webkit-transform: translate(-50%, -50%);
@@ -53,15 +48,15 @@ body {
 }
 
 #progress-time-fill {
-    animation-name: progress-fill; 
-    animation-timing-function: linear; 
+    animation-name: progress-fill;
+    animation-timing-function: linear;
     animation-iteration-count: infinite;
 }
 
 /* Death */
 #death-group {
     animation-name: walk;
-    animation-timing-function: ease; 
+    animation-timing-function: ease;
     animation-iteration-count: infinite;
     transform: translateX(0);
 }
@@ -115,10 +110,11 @@ body {
     left: 0;
     width: 0;
     color: #BE002A;
-    animation: text-red 20s ease infinite;
+    animation: text-red 40 s ease infinite;
     z-index: 2;
     background: #000;
 }
+
 .mask-white {
     right: 0;
 }
@@ -127,19 +123,19 @@ body {
 
 #red-flame {
     opacity: 0;
-    animation: show-flames 20s ease infinite, red-flame 120ms ease infinite;
+    animation: show-flames 40s ease infinite, red-flame 240ms ease infinite;
     transform-origin: center bottom;
 }
 
 #yellow-flame {
     opacity: 0;
-    animation: show-flames 20s ease infinite, yellow-flame 120ms ease infinite;
+    animation: show-flames 40s ease infinite, yellow-flame 240ms ease infinite;
     transform-origin: center bottom;
 }
 
 #white-flame {
     opacity: 0;
-    animation: show-flames 20s ease infinite, red-flame 100ms ease infinite;
+    animation: show-flames 40s ease infinite, red-flame 200ms ease infinite;
     transform-origin: center bottom;
 }
 
@@ -157,9 +153,11 @@ body {
     0% {
         transform: translateX(0);
     }
+
     6% {
         transform: translateX(0);
     }
+
     10% {
         transform: translateX(100px);
     }
@@ -279,17 +277,21 @@ body {
 
 @keyframes show-flames {
     0% {
-        transform:  translateY(0);
+        transform: translateY(0);
     }
+
     74% {
-        transform:  translateY(0);
+        transform: translateY(0);
     }
+
     80% {
-        transform:  translateY(-30px);
+        transform: translateY(-30px);
     }
+
     97% {
-        transform:  translateY(-30px);
+        transform: translateY(-30px);
     }
+
     100% {
         transform: translateY(0px);
     }
@@ -299,15 +301,19 @@ body {
     0% {
         opacity: 0;
     }
+
     74% {
         opacity: 0;
     }
+
     80% {
         opacity: 1;
     }
+
     99% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -323,11 +329,11 @@ body {
     }
 
     75% {
-        transform: translateY(-30px) scale(0.8, 0.7); 
+        transform: translateY(-30px) scale(0.8, 0.7);
     }
 
     100% {
-        transform: translateY(-30px) scale(1, 1); 
+        transform: translateY(-30px) scale(1, 1);
     }
 }
 
