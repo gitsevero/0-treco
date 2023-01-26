@@ -12,6 +12,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Anton&family=Monoton&family=Poppins&family=Roboto+Mono:ital@0;1&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="/nome_do_arquivo.css">
+
+
 
     <link rel="stylesheet" href="/deth line/style.css">
     <link rel="stylesheet" href="/style.css">
@@ -25,12 +28,17 @@
 <body>
     <div id="front">
         <div id="name">
-            <p id="nue">SEVERO</p>
-            <p id="nua"> DEV</p>
+            <p id="nue">0-TRECO <br></p>
+            <p>by</p>
+            <p id="nua"><a target="_blank" href="https://www.severodev.com/">Severo dev</a>
+            </p>
         </div>
-        <button class="jello-horizontal" onclick="goTime()">START</button>
-
+        <button class="jello-horizontal" id="start">START</button>
     </div>
+
+
+
+
 
 
 
@@ -52,13 +60,18 @@
 
         </div>
     </header>
+
     <p class="card-dicas 2" style="display: none;">DICA:</p>
     <p class="card-dicas" id="dica" onload="animate()">
     </p>
-    <section id="historico">
-        <h3 id="title-historico">Historico:</h3>
 
-        <p id="historical-letter"> </p>
+    <div id="contadorcontainer" class="container">
+
+    </div>
+
+
+    <section id="historico">
+
 
     </section>
 
@@ -67,7 +80,7 @@
 
 
     <form id="game-form">
-        <button type="submit" id="submit"></button>
+        <button type="submit" id="submit" onclick="go()"></button>
 
 
     </form>
@@ -159,8 +172,6 @@
 
     </div>
 
-    <script src="/deth line/jQuery.js"></script>
-    <script src="/deth line/script.js"></script>
 
 
 
@@ -175,7 +186,11 @@
 
 
 </body>
+<script src="/deth line/jQuery.js"></script>
+<script src="/deth line/script.js"></script>
+
 <script src="/script.js"></script>
+
 
 
 

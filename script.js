@@ -20,12 +20,12 @@ function generateWords() {
 
     console.log('comecou a funcao')
     // Defina o texto de entrada
-    const prompt = '  uma palavra em portugues que tenha no maximo 5 letras ';
+    const prompt = 'gere uma palavra usual aleatória';
 
     // Defina as configurações opcionais
     const options = {
-        temperature: 1, // Controla a criatividade da resposta
-        max_tokens: 20, // Controla o tamanho da resposta
+        temperature: .5, // Controla a criatividade da resposta
+        max_tokens: 10, // Controla o tamanho da resposta
         n: 1, // Controla o número de respostas geradas
     };
 
@@ -35,7 +35,7 @@ function generateWords() {
         max_tokens: options.max_tokens,
         temperature: options.temperature,
         n: options.n,
-        model: "text-davinci-001"
+        model: "text-davinci-003"
     });
 
     // Configuração da solicitação
@@ -114,6 +114,8 @@ document.body.onload = generateWords;
 // MANIPULANDO OS INPUTS
 let form = document.getElementById("game-form");
 let zy = 4;
+let dethline = document.getElementById('deadline')
+let dethline2 = dethline.innerHTML;
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -127,6 +129,8 @@ form.addEventListener("submit", function (e) {
             return;
         }
     }
+
+
 
     console.log(inputs)
 
@@ -144,6 +148,7 @@ form.addEventListener("submit", function (e) {
     array.forEach(function (e) {
 
         palavras += `${e.value}`
+        e.value = ''
 
     });
 
@@ -158,6 +163,7 @@ form.addEventListener("submit", function (e) {
 
 
         alert('voce acerteu')
+
 
 
 
@@ -307,11 +313,11 @@ function criandoDica() {
         numberDicaInterno -= 1;
         console.log(numberDicaInterno)
         numberDica.innerHTML -= 1;
-        const prompt = `em um jogo de advinhar palavras crie uma dica curta de para advinhar a palavra ${palavraChave}  `;
+        const prompt = `em um jogo de adivinhar palavras, crie uma dica  curta de para advinhar a palavra ${palavraChave} `;
 
         // Defina as configurações opcionais
         const options = {
-            temperature: 1, // Controla a criatividade da resposta
+            temperature: .5, // Controla a criatividade da resposta
             max_tokens: 30, // Controla o tamanho da resposta
             n: 1, // Controla o número de respostas geradas
         };
@@ -322,7 +328,7 @@ function criandoDica() {
             max_tokens: options.max_tokens,
             temperature: options.temperature,
             n: options.n,
-            model: "text-davinci-002"
+            model: "text-davinci-003"
         });
 
         // Configuração da solicitação
