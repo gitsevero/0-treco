@@ -1,5 +1,6 @@
 // Defina sua chave de API do OpenAI
 const apiKey = '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';
+const alerta = document.getElementById('alerta')
 
 let palavraChave = 'bola'
 const createInputs = document.getElementById('letter-inputs')
@@ -114,8 +115,7 @@ document.body.onload = generateWords;
 // MANIPULANDO OS INPUTS
 let form = document.getElementById("game-form");
 let zy = 4;
-let dethline = document.getElementById('deadline')
-let dethline2 = dethline.innerHTML;
+
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -125,10 +125,15 @@ form.addEventListener("submit", function (e) {
     // SE ALGUM IMPUT ESTIVER VAZIO 
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].value === "") {
-            alert("Por favor, preencha todos os campos!");
+            alert(arrayAlert[4]);
             return;
         }
     }
+    let dea = document.getElementById('deadline')
+    let dio = dea.innerHTML;
+    dea.innerHTML = '';
+    dea.innerHTML = dio;
+
 
 
 
@@ -148,26 +153,26 @@ form.addEventListener("submit", function (e) {
     array.forEach(function (e) {
 
         palavras += `${e.value}`
-        e.value = ''
+        e.value = '';
 
     });
 
+    palavraChave = palavraChave.toLowerCase();
+    palavras = palavras.toLowerCase();
 
 
-    console.log(palavras + "=fora")
-    console.log(palavraChave + '99')
+    console.log(palavraChave)
+    console.log(palavras)
 
 
     // COMPARA A PALAVRA VINDA DOS INPUT COM A PALAVRA SECRETA  
     if (palavras == palavraChave.toLowerCase()) {
-
-
-        alert('voce acerteu')
-
-
-
+        nivel += 1;
+        alert(arrayAlert[3])
+        reset();
 
     } else if (zy != 1) {
+        resetCountdown();
 
 
         zy -= 1;
@@ -176,7 +181,8 @@ form.addEventListener("submit", function (e) {
 
 
         // tornando a palavra chave em miniscula
-        palavraChave = palavraChave.toLowerCase();
+
+        console.log(palavras)
 
         // TORNANDO A palavraChave EM ARRAY DE LETRAS
         let arrayDosInputs = palavras.split("");
@@ -235,7 +241,7 @@ form.addEventListener("submit", function (e) {
         // SE NAO ESTIVER  NA ULTIMA VIDA MORRE
     } else if (zy === 1) {
 
-        alert("Você morreu");
+        alert(arrayAlert[1])
     }
 
 
@@ -252,11 +258,9 @@ function nextInput(input) {
             let nextInput = input.nextElementSibling;
             if (nextInput) {
                 nextInput.focus();
-            } else {
-                checkWord();
             }
         } else {
-            alert('somente numeros')
+            alert(arrayAlert[2])
             input.value = "";
 
 
@@ -265,8 +269,6 @@ function nextInput(input) {
         let prevInput = input.previousElementSibling;
         if (prevInput) {
             prevInput.focus();
-        } else {
-            checkWord();
         }
     }
 
@@ -313,6 +315,7 @@ function criandoDica() {
         numberDicaInterno -= 1;
         console.log(numberDicaInterno)
         numberDica.innerHTML -= 1;
+        console.log(palavraChave)
         const prompt = `em um jogo de adivinhar palavras, crie uma dica  curta de para advinhar a palavra ${palavraChave} `;
 
         // Defina as configurações opcionais
@@ -373,12 +376,39 @@ function criandoDica() {
                 console.error(error);
             });
     } else {
-        alert('voçê não tem mais dicas')
+        alert(arrayAlert[0])
     }
 
 
 
 }
+
+const arrayAlert = ['VOÇÊ NÃO TEM MAIS DICAS!', "Você morreu", 'SOMENTE LETRAS', 'VOCÊ ACERTOU', "Por favor, preencha todos os campos!", "ACABOU O TEMPO"]
+
+function alert(arrayAlert) {
+    alerta.innerHTML = `${arrayAlert}`
+    setInterval(function () {
+        alerta.innerHTML = '';
+    }, 5000);
+
+
+}
+function reset() {
+    mensagemCounter();
+    deleteHistorico();
+    deathDisplay()
+    setTimeout(function () {
+        deathDisplay();
+        deleteMensagemCounter();
+        startHistorico();
+
+
+
+    }, 10000);
+
+
+}
+
 
 
 
