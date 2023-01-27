@@ -8,8 +8,10 @@ const contadorContainer = document.getElementById('contadorcontainer');
 const front = document.getElementById("front");
 const historico = document.getElementById('historico');
 let resetdeath = document.getElementById('submit');
-var nivel = 0;
+const nvtext = document.getElementById('nivel')
+let nivel = 0;
 let display = document.getElementById('deadline');
+
 
 
 
@@ -17,6 +19,7 @@ let display = document.getElementById('deadline');
 
 btnstart.addEventListener("click", function () {
 
+    generateWords();
     mensagemCounter();
     front.classList.add("caiu");
 
@@ -26,12 +29,14 @@ btnstart.addEventListener("click", function () {
 
 
     setTimeout(function () {
-
-        countdown();
+        deathDisplay();
         startHistorico();
+        headerEntry();
         deleteMensagemCounter();
         console.log('oi')
-        deathDisplay();
+
+
+
 
         $('#progress-time-fill, #death-group').css({ 'animation-duration': animationTime + 's' });
 
@@ -54,6 +59,13 @@ btnstart.addEventListener("click", function () {
     }, 10000);
 });
 
+function headerEntry() {
+
+    const div = document.querySelector('.sub-header');
+    div.style.display = 'flex'
+
+}
+
 
 
 
@@ -65,12 +77,13 @@ function mensagemCounter() {
     } else {
         contadorContainer.innerHTML = "";
         contadorContainer.innerHTML += `<p id="yready">PARABENS <br> VAMOS PARA O NIVEL ${nivel}</p> <span id="counter"></span>`
+        contadorContainer.style.zIndex = 2;
     }
 
 };
 function deleteMensagemCounter() {
     contadorContainer.innerHTML = "";
-
+    contadorContainer.style.zIndex = -1;
 }
 
 
@@ -99,8 +112,11 @@ let intervalId;
 function countdown() {
     intervalId = setInterval(function () {
         count--;
+        console.log(count)
         if (count === 0) {
-            alert(arrayAlert[5]);
+            alert("ACABOU O TEMPO");
+            lostLife();
+            resetDeathLine();
             clearInterval(intervalId);
         }
     }, 1000);
@@ -118,6 +134,7 @@ function resetCountdown() {
 
 
 var deadlineAnimation = function () {
+    countdown();
     setTimeout(function () {
         $('#designer-arm-grop').css({ 'animation-duration': '3s' });
     }, 0);

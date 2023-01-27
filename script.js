@@ -14,12 +14,6 @@ const apiUrl = 'https://api.openai.com/v1/completions';
 // Cria a função para fazer a solicitação
 function generateWords() {
 
-
-
-
-
-
-    console.log('comecou a funcao')
     // Defina o texto de entrada
     const prompt = 'gere uma palavra usual aleatória';
 
@@ -49,15 +43,16 @@ function generateWords() {
         body: requestBody
     };
 
-    // Executa a solicitação
-    console.log('Executa a solicitação')
+    let container = document.getElementById("game-form");
+    let contador = 0;
+
     fetch(apiUrl, requestOptions)
+
 
         .then(response => response.json())
         .then(data => {
 
             // Trata a resposta
-            console.log(data)
 
             const text = data.choices[0].text;
 
@@ -71,8 +66,9 @@ function generateWords() {
             // retornando em um array
             // tornado o array e uma palavra
             palavraChave = letras.join("");
-            let container = document.getElementById("game-form");
-            let contador = 0;
+
+            container.innerHTML = `<button type="submit" id="submit"></button>`
+            contador = 0;
 
 
             // crinado os inputs de acordo com a quantidade de letras dessa palavras
@@ -82,12 +78,7 @@ function generateWords() {
             });
 
 
-
-
             return palavraChave
-
-
-
 
 
         })
@@ -103,9 +94,6 @@ function generateWords() {
 // criando os inputs
 
 
-// Chama a função no evento onload do body
-document.body.onload = generateWords;
-
 
 
 
@@ -114,7 +102,7 @@ document.body.onload = generateWords;
 
 // MANIPULANDO OS INPUTS
 let form = document.getElementById("game-form");
-let zy = 4;
+let zy = 2;
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -125,14 +113,10 @@ form.addEventListener("submit", function (e) {
     // SE ALGUM IMPUT ESTIVER VAZIO 
     for (let i = 0; i < inputs.length; i++) {
         if (inputs[i].value === "") {
-            alert(arrayAlert[4]);
+            alert("Por favor, preencha todos os campos!");
             return;
         }
     }
-    let dea = document.getElementById('deadline')
-    let dio = dea.innerHTML;
-    dea.innerHTML = '';
-    dea.innerHTML = dio;
 
 
 
@@ -141,12 +125,9 @@ form.addEventListener("submit", function (e) {
 
     const array = Array.from(inputs)
 
-    //    mapeando a div com as imagens das vidas
-    let palavras = ''
-    let imgElements = document.querySelectorAll("#vidas img");
-    let imgArray = Array.from(imgElements);
 
-    let vidas = document.querySelector("#vidas");
+    let palavras = ''
+
 
 
     // TRASNFORMA AS LETRAS DO INPUT  EM UMA PALAVRA
@@ -167,32 +148,24 @@ form.addEventListener("submit", function (e) {
 
     // COMPARA A PALAVRA VINDA DOS INPUT COM A PALAVRA SECRETA  
     if (palavras == palavraChave.toLowerCase()) {
+
         nivel += 1;
-        alert(arrayAlert[3])
+        nvtext.innerHTML = nivel;
         reset();
 
-    } else if (zy != 1) {
+    } else if (zy !== 1) {
+
         resetCountdown();
+        resetDeathLine();
 
 
-        zy -= 1;
-
-        console.log(zy)
-
-
-        // tornando a palavra chave em miniscula
-
-        console.log(palavras)
 
         // TORNANDO A palavraChave EM ARRAY DE LETRAS
         let arrayDosInputs = palavras.split("");
         let arrayB = palavraChave.split("")
 
-        console.log(arrayDosInputs)
 
         // VERIFICA SE ALGUM DOS INPUTS ESTA NA PALAVRA CHAVE
-
-
 
         let historicalLetter = document.getElementById("historical-letter");
         if (historicalLetter) {
@@ -224,24 +197,9 @@ form.addEventListener("submit", function (e) {
             }
         }
 
-
-
-
-
-
-
         // REMOVE UMA VIDA NAS IMG 
-        imgArray.pop();
-        let imgToRemove = imgArray[imgArray.length - 1];
-        vidas.removeChild(imgToRemove);
-
-
-
-
+        lostLife();
         // SE NAO ESTIVER  NA ULTIMA VIDA MORRE
-    } else if (zy === 1) {
-
-        alert(arrayAlert[1])
     }
 
 
@@ -260,7 +218,7 @@ function nextInput(input) {
                 nextInput.focus();
             }
         } else {
-            alert(arrayAlert[2])
+            alert('SOMENTE LETRAS')
             input.value = "";
 
 
@@ -376,17 +334,17 @@ function criandoDica() {
                 console.error(error);
             });
     } else {
-        alert(arrayAlert[0])
+        alert('VOÇÊ NÃO TEM MAIS DICAS!')
     }
 
 
 
 }
 
-const arrayAlert = ['VOÇÊ NÃO TEM MAIS DICAS!', "Você morreu", 'SOMENTE LETRAS', 'VOCÊ ACERTOU', "Por favor, preencha todos os campos!", "ACABOU O TEMPO"]
 
-function alert(arrayAlert) {
-    alerta.innerHTML = `${arrayAlert}`
+
+function alert(Alert) {
+    alerta.innerHTML = `${Alert}`
     setInterval(function () {
         alerta.innerHTML = '';
     }, 5000);
@@ -396,7 +354,8 @@ function alert(arrayAlert) {
 function reset() {
     mensagemCounter();
     deleteHistorico();
-    deathDisplay()
+    deathDisplay();
+    generateWords();
     setTimeout(function () {
         deathDisplay();
         deleteMensagemCounter();
@@ -408,7 +367,37 @@ function reset() {
 
 
 }
+function lostLife() {
+    if (zy == 1) {
 
+        alert("Você morreu")
+    } else {
+        resetCountdown();
+        let imgElements = document.querySelectorAll("#vidas img");
+        let imgArray = Array.from(imgElements);
+        let vidas = document.querySelector("#vidas");
+        imgArray.pop();
+        let imgToRemove = imgArray[imgArray.length - 1];
+        vidas.removeChild(imgToRemove);
+        zy -= 1;
+    }
+
+
+
+};
+function resetMorreu() {
+    deathDisplay();
+    deleteHistorico();
+
+
+};
+function resetDeathLine() {
+    let dea = document.getElementById('deadline')
+    let dio = dea.innerHTML;
+    dea.innerHTML = '';
+    dea.innerHTML = dio;
+
+};
 
 
 

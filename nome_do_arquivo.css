@@ -4,12 +4,12 @@
 }
 
 .container {
-
   z-index: 1;
   background-color: black;
   text-shadow: 1px 1px 0px white;
   color: #444;
   width: 50%;
+  height: 80%;
   margin: 4em auto;
 }
 
