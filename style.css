@@ -3,7 +3,7 @@
     box-sizing: border-box;
     padding: 0;
     text-decoration: none;
-  
+
 }
 
 
@@ -694,7 +694,7 @@ p.space {
     }
 
     .card-dicas {
-        width: 70%;
+        width: 100%;
         ;
     }
 
@@ -730,8 +730,61 @@ p.space {
         font-family: 'Bebas Neue', cursive;
     }
 
+    #name {
+        width: 100%;
+    }
+
+    #nue {
+        margin: 0;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    #counter {
+        margin: 0;
+        width: 100%;
+
+    }
+
+    #counter::before,
+    #counter::after {
+        width: 100%;
+    }
+
+    #counter::after {
+        margin: 0;
+        right: -10px
+    }
+
+    #vidas {
+        display: flex;
+        justify-content: center;
+    }
+
+    #vidas img {
+        width: 15px;
+        margin-top: 0%;
+    }
+
+    #alerta {
+        width: 90%;
+        font-size: 1rem;
+    }
+
+    #lost {
+        width: 90%;
+        height: 70%;
+        top: 15%;
+        font-size: 1.5rem;
+    }
+
+    #lost button {
+        width: auto;
+    }
+
+
 
 
 }
-
-

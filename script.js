@@ -429,7 +429,7 @@ function lostLife() {
 };
 function resetMorreu() {
     clearInterval(intervalId);
-   div.style.display='none'
+    div.style.display = 'none'
     stopCountdown();
     deleteHistorico();
     clearInputs();
@@ -492,9 +492,9 @@ function clearDeathMMessage() {
 
 }
 const form1 = document.querySelector("form");
-form1.addEventListener("keydown", function(event) {
+form1.addEventListener("keydown", function (event) {
     if (event.target.tagName === "INPUT" && (event.key === "Delete" || event.key === "Backspace")) {
-        if(event.target.value === ""){
+        if (event.target.value === "") {
             event.target.previousElementSibling.focus();
         } else {
             event.target.value = "";
