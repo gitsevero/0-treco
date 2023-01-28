@@ -429,9 +429,8 @@ function lostLife() {
 };
 function resetMorreu() {
     clearInterval(intervalId);
-    headerEntry();
+   div.style.display='none'
     stopCountdown();
-    deathDisplay();
     deleteHistorico();
     clearInputs();
     detahMessage()
@@ -466,6 +465,7 @@ function startTimer() {
 }
 
 function detahMessage() {
+    display.style.display = ''
     clearInterval(intervalId);
     dicacase.innerHTML = '';
     let crons = cronus - (nivel * 10);

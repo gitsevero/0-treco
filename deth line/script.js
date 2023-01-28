@@ -12,6 +12,8 @@ const nvtext = document.getElementById('nivel')
 let nivel = 1;
 let display = document.getElementById('deadline');
 animationTime = 40;
+const div = document.querySelector('.sub-header');
+    
 
 
 
@@ -68,13 +70,11 @@ function startIntroGame() {
 
 function headerEntry() {
 
-    const div = document.querySelector('.sub-header');
-    if (div.style.display === '') {
+   
         div.style.display = 'flex'
-    } else {
-        div.style.display = '';
-
-    }
+  
+       
+    
 
 
 
