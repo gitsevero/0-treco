@@ -9,16 +9,27 @@ const front = document.getElementById("front");
 const historico = document.getElementById('historico');
 let resetdeath = document.getElementById('submit');
 const nvtext = document.getElementById('nivel')
-let nivel = 0;
+let nivel = 1;
 let display = document.getElementById('deadline');
+animationTime = 40;
 
 
 
 
 
 
-btnstart.addEventListener("click", function () {
+function startIntroGame() {
+    clearInterval(intervalId);
 
+    contadorContainer.style.zIndex = 1;
+    createLifes()
+    numberDica.innerHTML = 2;
+    numberDicaInterno = 2;
+    nivel = 1;
+
+
+    clearDeathMMessage();
+    startTimer();
     generateWords();
     mensagemCounter();
     front.classList.add("caiu");
@@ -33,9 +44,6 @@ btnstart.addEventListener("click", function () {
         startHistorico();
         headerEntry();
         deleteMensagemCounter();
-        console.log('oi')
-
-
 
 
         $('#progress-time-fill, #death-group').css({ 'animation-duration': animationTime + 's' });
@@ -44,25 +52,31 @@ btnstart.addEventListener("click", function () {
         deadlineText();
 
         deadlineAnimation();
+        countdown();
         timer(animationTime, days);
 
         setInterval(function () {
             timer(animationTime, days);
             deadlineAnimation();
 
-            console.log('begin interval', animationTime * 1000);
-
         }, animationTime * 1000);
 
 
 
     }, 10000);
-});
+};
 
 function headerEntry() {
 
     const div = document.querySelector('.sub-header');
-    div.style.display = 'flex'
+    if (div.style.display === '') {
+        div.style.display = 'flex'
+    } else {
+        div.style.display = '';
+
+    }
+
+
 
 }
 
@@ -71,7 +85,7 @@ function headerEntry() {
 
 
 function mensagemCounter() {
-    if (nivel === 0) {
+    if (nivel === 1) {
         contadorContainer.innerHTML = "";
         contadorContainer.innerHTML += `<p id="yready">VOCÊ ESTÁ PRONTO?</p> <span id="counter"></span>`
     } else {
@@ -89,8 +103,10 @@ function deleteMensagemCounter() {
 
 function removeIntro() {
     const front = document.getElementById("front");
-    const parent = front.parentNode;
-    parent.removeChild(front);
+    if (document.body.children[0].id === 'front') {
+        const parent = front.parentNode;
+        parent.removeChild(front);
+    }
 
 
 }
@@ -110,20 +126,29 @@ let count = 40;
 let intervalId;
 
 function countdown() {
+
+    count = 40;
+    console.log(count)
     intervalId = setInterval(function () {
         count--;
-        console.log(count)
+
         if (count === 0) {
-            alert("ACABOU O TEMPO");
+            alert("TEMPO ESGOTADO TENTE DE NOVO");
             lostLife();
             resetDeathLine();
             clearInterval(intervalId);
+            countdown();
+
         }
     }, 1000);
 }
 
-function resetCountdown() {
+function stopCountdown() {
     clearInterval(intervalId);
+}
+
+function resetCountdown() {
+    stopCountdown();
     count = 40;
     countdown();
 }
@@ -134,7 +159,7 @@ function resetCountdown() {
 
 
 var deadlineAnimation = function () {
-    countdown();
+
     setTimeout(function () {
         $('#designer-arm-grop').css({ 'animation-duration': '3s' });
     }, 0);
@@ -187,6 +212,16 @@ function deathDisplay() {
         display.style.display = ''
     }
 
+
+}
+
+function createLifes() {
+    zy = 4
+    let vidas = document.getElementById('vidas')
+    vidas.innerHTML = `<img src="/heart.png" alt="">
+                    <img src="/heart.png" alt="">
+                    <img src="/heart.png" alt="">
+                    <img src="/heart.png" alt=""></img>` ;
 
 }
 

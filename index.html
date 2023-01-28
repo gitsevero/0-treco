@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
         integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/btn.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link
-        href="https://fonts.googleapis.com/css2?family=Anton&family=Monoton&family=Poppins&family=Roboto+Mono:ital@0;1&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Monoton&family=Poppins:ital,wght@0,500;0,600;1,600&family=Roboto+Mono:wght@200;400&family=Roboto:wght@300;400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/nome_do_arquivo.css">
 
     <link rel="stylesheet" href="/deth line/style.css">
     <link rel="stylesheet" href="/style.css">
+
 
 
 
@@ -35,14 +36,8 @@
             <p id="nua"><a target="_blank" href="https://www.severodev.com/">Severo dev</a>
             </p>
         </div>
-        <button class="jello-horizontal" id="start">START</button>
+        <button class="jello-horizontal" id="start" onclick="startIntroGame()">START</button>
     </div>
-
-
-
-
-
-
 
 
     <header class="header">
@@ -55,46 +50,30 @@
             <div class="vidas">
                 <p>vidas:</p>
                 <span id="vidas">
-                    <img src="/heart.png" alt="">
-                    <img src="/heart.png" alt="">
-                    <img src="/heart.png" alt="">
-                    <img src="/heart.png" alt="">
+
                 </span>
             </div>
             <div class="nivel">
                 <p>Nivel:</p>
-                <p id="nivel">0</p>
+                <p id="nivel">1</p>
             </div>
         </div>
-
     </header>
 
 
-    <p class=" card-dicas" id="dica" onload="animate()">
-    </p>
-    <p id="alerta">
 
-    </p>
+    <p class=" card-dicas" id="dica" onload="animate()"></p>
 
-    <div id="contadorcontainer" class="container">
+    <p id="alerta"></p>
 
-    </div>
+    <div id="contadorcontainer" class="container"></div>
 
+    <section id="historico"></section>
 
-    <section id="historico">
+    <form id="game-form"> <button type="submit" id="submit"></button></form>
 
 
-    </section>
-
-
-
-
-
-    <form id="game-form">
-        <button type="submit" id="submit"></button>
-
-
-    </form>
+    <div id="lost" style="display: none;"></div>
 
 
 

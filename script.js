@@ -1,6 +1,8 @@
 // Defina sua chave de API do OpenAI
 const apiKey = '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';
 const alerta = document.getElementById('alerta')
+const mensagemDeMorte = document.getElementById('lost')
+let startTime;
 
 let palavraChave = 'bola'
 const createInputs = document.getElementById('letter-inputs')
@@ -67,6 +69,8 @@ function generateWords() {
             // tornado o array e uma palavra
             palavraChave = letras.join("");
 
+
+
             container.innerHTML = `<button type="submit" id="submit"></button>`
             contador = 0;
 
@@ -76,6 +80,10 @@ function generateWords() {
                 contador += 1;
                 container.innerHTML += `  <input type="text" maxlength="1" pattern="[a-zA-Z\u00C0-\u017F]*" oninput="nextInput(this)"  class="letter-input" tabindex="${contador}" >`
             });
+
+
+            palavraChave = palavraChave.toLowerCase();
+
 
 
             return palavraChave
@@ -102,7 +110,7 @@ function generateWords() {
 
 // MANIPULANDO OS INPUTS
 let form = document.getElementById("game-form");
-let zy = 2;
+let zy = 4;
 
 form.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -121,7 +129,7 @@ form.addEventListener("submit", function (e) {
 
 
 
-    console.log(inputs)
+
 
     const array = Array.from(inputs)
 
@@ -138,22 +146,19 @@ form.addEventListener("submit", function (e) {
 
     });
 
-    palavraChave = palavraChave.toLowerCase();
+
     palavras = palavras.toLowerCase();
 
 
-    console.log(palavraChave)
-    console.log(palavras)
-
 
     // COMPARA A PALAVRA VINDA DOS INPUT COM A PALAVRA SECRETA  
-    if (palavras == palavraChave.toLowerCase()) {
+    if (palavras === palavraChave) {
 
         nivel += 1;
         nvtext.innerHTML = nivel;
         reset();
 
-    } else if (zy !== 1) {
+    } else {
 
         resetCountdown();
         resetDeathLine();
@@ -161,8 +166,8 @@ form.addEventListener("submit", function (e) {
 
 
         // TORNANDO A palavraChave EM ARRAY DE LETRAS
-        let arrayDosInputs = palavras.split("");
-        let arrayB = palavraChave.split("")
+        let arrayDosInputs = palavras.split('');
+        let arrayB = palavraChave.split('');
 
 
         // VERIFICA SE ALGUM DOS INPUTS ESTA NA PALAVRA CHAVE
@@ -263,22 +268,44 @@ let palavradica = 'nao deu'
 const numberDica = document.getElementById('numberDica')
 const dicacase = document.getElementById('dica');
 
-numberDica.innerHTML = 1;
+numberDica.innerHTML = 2;
 
-let numberDicaInterno = 1;
+let numberDicaInterno = 2;
 function criandoDica() {
-
-
-    if (numberDicaInterno > 0) {
+    if (numberDicaInterno > 1) {
         numberDicaInterno -= 1;
-        console.log(numberDicaInterno)
+
         numberDica.innerHTML -= 1;
-        console.log(palavraChave)
-        const prompt = `em um jogo de adivinhar palavras, crie uma dica  curta de para advinhar a palavra ${palavraChave} `;
+
+        let palavraChavedica = palavraChave.split('');
+        let letraDaDica = palavraChavedica[1];
+        letraDaDica = letraDaDica.toUpperCase();
+
+        let dicaPrimeiraLetra = `a segunda letra é "${letraDaDica}"`;
+
+        const str = dicaPrimeiraLetra.split('');
+
+        (function animate() {
+            str.length > 0 ? dicacase.innerHTML += str.shift() : clearTimeout(running);
+            var running = setTimeout(animate, 90);
+
+        })();
+
+
+
+
+    } else if (numberDicaInterno > 0) {
+        numberDicaInterno -= 1;
+
+        numberDica.innerHTML -= 1;
+
+        let palavraDica1 = palavraChave
+
+        const prompt = `descreva com poucas  palavras  a palavra '${palavraDica1}' `;
 
         // Defina as configurações opcionais
         const options = {
-            temperature: .5, // Controla a criatividade da resposta
+            temperature: 1, // Controla a criatividade da resposta
             max_tokens: 30, // Controla o tamanho da resposta
             n: 1, // Controla o número de respostas geradas
         };
@@ -289,7 +316,7 @@ function criandoDica() {
             max_tokens: options.max_tokens,
             temperature: options.temperature,
             n: options.n,
-            model: "text-davinci-003"
+            model: "text-davinci-001"
         });
 
         // Configuração da solicitação
@@ -309,14 +336,25 @@ function criandoDica() {
             .then(response => response.json())
             .then(data => {
                 // Trata a resposta
-                console.log(data)
+
 
                 const text1 = data.choices[0].text;
-                console.log(text1)
+
                 palavradica = text1
 
-                console.log(palavradica)
-                const str = palavradica.split("");
+                let frase = palavradica;
+                let palavrafiltro = `${palavraDica1}`;
+
+
+                frase = frase.replace(new RegExp(palavrafiltro, "gi"), function replacer(match) {
+                    return match.replace(/./g, "x");
+                });
+                // "Este é um xxxxxx de string com uma palavra a ser filtrada"
+
+
+
+                const str = frase.split('');
+                dicacase.innerHTML += '<br></br>';
 
                 (function animate() {
                     str.length > 0 ? dicacase.innerHTML += str.shift() : clearTimeout(running);
@@ -358,6 +396,7 @@ function reset() {
     generateWords();
     setTimeout(function () {
         deathDisplay();
+        resetCountdown()
         deleteMensagemCounter();
         startHistorico();
 
@@ -368,10 +407,12 @@ function reset() {
 
 }
 function lostLife() {
-    if (zy == 1) {
+    if (zy === 1) {
 
-        alert("Você morreu")
+        resetMorreu();
+        clearInterval(intervalId);
     } else {
+        clearInterval(intervalId);
         resetCountdown();
         let imgElements = document.querySelectorAll("#vidas img");
         let imgArray = Array.from(imgElements);
@@ -386,12 +427,17 @@ function lostLife() {
 
 };
 function resetMorreu() {
+    clearInterval(intervalId);
+    headerEntry();
+    stopCountdown();
     deathDisplay();
     deleteHistorico();
-
+    clearInputs();
+    detahMessage()
 
 };
 function resetDeathLine() {
+
     let dea = document.getElementById('deadline')
     let dio = dea.innerHTML;
     dea.innerHTML = '';
@@ -399,6 +445,51 @@ function resetDeathLine() {
 
 };
 
+function clearInputs() {
+    let container = document.getElementById("game-form");
+    container.innerHTML = ''
+
+}
+var cronus = 0;
+let cronId;
+
+function startTimer() {
+    cronus = 0;
+    cronId;
+
+    cronId = setInterval(function () {
+
+        cronus++;
+
+    }, 1000);
+}
+
+function detahMessage() {
+    clearInterval(intervalId);
+    dicacase.innerHTML = '';
+    let crons = cronus - (nivel * 10);
+    clearInterval(cronId);
+    mensagemDeMorte.innerHTML = `    <div id="lost-message">
+    <p> Parabens você foi até o nivel:${nivel}</p>
+    <p>a palavra secreta era "${palavraChave}"</p>
+</div>
+<div id="details">
+    <p>voce jogou durante ${crons} segundos</p>
+</div>
+
+<button id="reset-game" onclick="startIntroGame()" class="custom-btn btn-3"><span>recomeçar</span></button>
+
+`
+    mensagemDeMorte.style.display = 'flex'
+
+
+}
+
+function clearDeathMMessage() {
+    mensagemDeMorte.innerHTML = ''
+    mensagemDeMorte.style.display = 'none'
+
+}
 
 
 

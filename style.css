@@ -105,9 +105,9 @@ a {
 
 
 .letter-input {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Bebas Neue', cursive;
     text-transform: lowercase;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     text-align: center;
     width: 3%;
 
@@ -210,14 +210,17 @@ h3#title-historico {
 
 
 .jello-horizontal {
+    cursor: pointer;
     border-radius: 50%;
     z-index: 10;
     font-size: 10px;
     width: 4.5rem;
     height: 4.5rem;
     border: .5rem solid grey;
+}
 
-
+.jello-horizontal:hover {
+    scale: 1.1;
 }
 
 #name {
@@ -237,23 +240,23 @@ p.space {
     margin: .5rem;
 }
 
-.jello-horizontal:hover {
-    -webkit-animation: jello-horizontal 1s both;
-    animation: jello-horizontal 1s both;
-}
+
 
 #nue {
+
     font-size: 3rem;
     margin-right: 1rem;
 }
 
 #nua {
+
     -webkit-animation: jello-vertical 2s infinite both;
     animation: jello-vertical 2s infinite both;
     font-size: 2rem;
 }
 
 #front {
+    font-family: 'Monoton';
     background-color: black;
     display: flex;
     justify-content: center;
@@ -264,6 +267,34 @@ p.space {
     width: 100%;
     height: 100%;
 
+}
+
+#lost {
+    border: 2px solid hsl(198.18, 100%, 45.29%);
+    font-size: 2rem;
+    font-family: 'Bebas Neue', cursive;
+    display: flex;
+    top: 25%;
+    align-self: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    z-index: 5;
+    background-color: rgb(248, 248, 248);
+    position: absolute;
+    width: 50%;
+    height: 50%;
+
+}
+
+#lost div {
+
+    margin-bottom: 3rem;
+}
+
+#lost button {
+    margin: 0 auto;
+    width: 20%;
 }
 
 #alerta {
@@ -291,47 +322,13 @@ p.space {
 
 #sub-header {
     display: none;
-    -webkit-animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    -webkit-animation: slide-in-top .7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-top 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 
 
 
-
-@media only screen and (max-width: 768px) {
-    .header {
-        width: 100%;
-    }
-
-    .letter-input {
-        width: 9.5%;
-    }
-
-    #submit {
-        position: absolute;
-        margin-top: 5rem;
-        width: 100%;
-        height: 100%;
-    }
-
-    .card-dicas {
-        width: 70%;
-        ;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-}
 
 
 /* ----------------------------------------------
@@ -674,4 +671,70 @@ p.space {
         transform: translateY(0);
         opacity: 1;
     }
+}
+
+@media only screen and (max-width: 768px) {
+    .header {
+        width: 100%;
+    }
+
+    .letter-input {
+        width: 9.5%;
+    }
+
+    #submit {
+        position: absolute;
+        margin-top: 5rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    .card-dicas {
+        width: 70%;
+        ;
+    }
+
+    #historico {
+        top: 70%;
+        width: 100%;
+        right: 0;
+
+    }
+
+    h3#title-historico {
+        font-size: 1rem;
+    }
+
+    .red-background {
+        line-height: 2.2rem;
+        padding: 0;
+        font-family: 'Bebas Neue', cursive;
+
+
+    }
+
+    .blue-background {
+        padding: 0;
+        line-height: 2.2rem;
+        font-family: 'Bebas Neue', cursive;
+
+    }
+
+    .green-background {
+        padding: 0;
+        line-height: 2.2rem;
+        font-family: 'Bebas Neue', cursive;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 }
