@@ -225,10 +225,10 @@ function deathDisplay() {
 function createLifes() {
     zy = 4
     let vidas = document.getElementById('vidas')
-    vidas.innerHTML = `<img src="/heart.png" alt="">
-                    <img src="/heart.png" alt="">
-                    <img src="/heart.png" alt="">
-                    <img src="/heart.png" alt=""></img>` ;
+    vidas.innerHTML = `<img src="/0-treco assets/img/heart.png" alt="">
+                    <img src="/0-treco assets/img/heart.png" alt="">
+                    <img src="/0-treco assets/img/heart.png" alt="">
+                    <img src="/0-treco assets/img/heart.png" alt=""></img>` ;
 
 }
 

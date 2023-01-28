@@ -103,7 +103,7 @@
 
 
 
-@-webkit-keyframes shiny-btn1 {
+@-webkit-keyframes animacao {
     0% {
         -webkit-transform: scale(0) rotate(45deg);
         opacity: 0;
