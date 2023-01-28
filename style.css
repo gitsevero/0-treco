@@ -335,12 +335,16 @@ footer {
     font-size: .7rem;
     display: flex;
     flex-direction: row;
-    color: grey;
+    color: rgba(128, 128, 128, 0.637);
     justify-content: space-between;
-    padding: 0 25% .5rem;
+    padding: 0 10% .5rem;
     align-items: center;
 }
 
+#criador {
+    margin-left: 10rem;
+    font-size: .85rem;
+}
 
 
 
