@@ -13,7 +13,7 @@ let nivel = 1;
 let display = document.getElementById('deadline');
 animationTime = 40;
 const div = document.querySelector('.sub-header');
-    
+
 
 
 
@@ -70,11 +70,11 @@ function startIntroGame() {
 
 function headerEntry() {
 
-   
-        div.style.display = 'flex'
-  
-       
-    
+
+    div.style.display = 'flex'
+
+
+
 
 
 
@@ -111,7 +111,7 @@ function removeIntro() {
 
 }
 function startHistorico() {
-    historico.innerHTML += ` <h3 id="title-historico">Historico:</h3>
+    historico.innerHTML += ` <h3 id="title-historico"></h3>
     <p id="historical-letter"> </p>`;
 
 };
@@ -133,11 +133,18 @@ function countdown() {
         count--;
 
         if (count === 0) {
-            alert("TEMPO ESGOTADO TENTE DE NOVO");
-            lostLife();
-            resetDeathLine();
-            clearInterval(intervalId);
-            countdown();
+            if (zy === 1) {
+                lostLife();
+            } else {
+                lostLife();
+                alert("TEMPO ESGOTADO TENTE DE NOVO");
+
+                resetDeathLine();
+                clearInterval(intervalId);
+                countdown();
+
+            }
+
 
         }
     }, 1000);

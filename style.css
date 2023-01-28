@@ -330,6 +330,18 @@ p.space {
     animation: slide-in-top 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
+footer {
+    width: 100%;
+    font-size: .7rem;
+    display: flex;
+    flex-direction: row;
+    color: grey;
+    justify-content: space-between;
+    padding: 0 25% .5rem;
+    align-items: center;
+}
+
+
 
 
 
