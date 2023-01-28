@@ -3,6 +3,7 @@ const apiKey = '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';
 const alerta = document.getElementById('alerta')
 const mensagemDeMorte = document.getElementById('lost')
 let startTime;
+const inputao = document.querySelectorAll('.letter-input');
 
 let palavraChave = 'bola'
 const createInputs = document.getElementById('letter-inputs')
@@ -301,7 +302,7 @@ function criandoDica() {
 
         let palavraDica1 = palavraChave
 
-        const prompt = `descreva com poucas  palavras  a palavra '${palavraDica1}' `;
+        const prompt = `diga o que é com poucas  palavras  a palavra '${palavraDica1}' `;
 
         // Defina as configurações opcionais
         const options = {
@@ -490,9 +491,16 @@ function clearDeathMMessage() {
     mensagemDeMorte.style.display = 'none'
 
 }
-
-
-
+const form1 = document.querySelector("form");
+form1.addEventListener("keydown", function(event) {
+    if (event.target.tagName === "INPUT" && (event.key === "Delete" || event.key === "Backspace")) {
+        if(event.target.value === ""){
+            event.target.previousElementSibling.focus();
+        } else {
+            event.target.value = "";
+        }
+    }
+});
 
 
 
